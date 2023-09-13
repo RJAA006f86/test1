@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>/</rootDir>
+    <exportSource>true</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>false</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation>C:\pleiades\tomcat\6\webapps\web_basic.war</warLocation>
+    <extraInfo></extraInfo>
+    <webPath>/web_basic</webPath>
+</tomcatProjectProperties>
