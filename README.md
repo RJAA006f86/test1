@@ -34,6 +34,9 @@ https://github.com/RJAA006f86/test1/assets/144433854/5dfcbbef-ffe2-42cd-927b-b12
 ・Google Chrome バージョン: 116.0.5845.96（Official Build） （64 ビット）
 
 ## インストール方法
-これをご覧になっている方には説明不要だとは思いますが念のため併記します。
+これをご覧になっている方には説明不要だとは思いますが念のため記載します。web_basic/war/フォルダからWarファイルweb_basic.war
+をダウンロードしていただき、お使いのTomcatのApache Software Foundation\Tomcat 7.0\webapps内に配置しTomcatを起動、あとは使い
+
+方デモ動画でご説明したURLを入力すれば動作します。
 
 
