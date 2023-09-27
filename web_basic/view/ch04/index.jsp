@@ -3,7 +3,8 @@
 <%
 String userType = (String)request.getAttribute("userType");  /* ユーザーが選択したグループを示す変数*/
 String message = (String)request.getAttribute("message");    /* 注意事項の確認未実施時のメッセージ用の変数*/
-String confirm = (String)request.getAttribute("confirm");    /* 注意事項確認を行ったか否かを管理する変数*/
+String confirm = (String)request.getAttribute("confirm");/* 注意事項確認を行ったか否かを管理する変数*/
+String second = (String)session.getAttribute("second");
 %>
 
 
@@ -58,20 +59,21 @@ margin:0px auto 0px;
 
 }
 
-
 </style>
 	<head>
 		<title>【グループ選択ページ】</title>
 	</head>
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<%if(second != null) {%>
+	<meta http-equiv="refresh" content="3; URL=<%=request.getContextPath()%>/view/ch04/logout.jsp">
+	<%} %>
 	<body>
 			<h1 style="text-align:center">グループ選択ページ</h1>
 			<hr style="height:3; background-color:#0000ff" />
 			<br>
 			<br>
 			<br>
-
-
-
 
 
 			<!-- 2つのプルダウンの選択結果により表示変更。またいいえを選択した場合選択でもグループは保持される
@@ -134,10 +136,10 @@ margin:0px auto 0px;
 				<!-- 条件分岐。ユーザーがいいえを選択した場合、サーブレットから返されたパラメータにより
 				注意事項確認を促すメッセージが表示される-->
 				<% if(message != null) {%>
-			<p style="color:red"class = "Warning"><%=message %></p>
-			<%} %>
+				<p style="color:red"class = "Warning"><%=message %></p>
+				<%} %>
 				<br>
 				<input type="submit" value="送信">
 				</form>
-			</body>
+	</body>
 </html>

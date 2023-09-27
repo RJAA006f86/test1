@@ -55,7 +55,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
 String userType = (String)request.getAttribute("userType");  /* ユーザーが選択したグループを示す変数*/
 String message = (String)request.getAttribute("message");    /* 注意事項の確認未実施時のメッセージ用の変数*/
-String confirm = (String)request.getAttribute("confirm");    /* 注意事項確認を行ったか否かを管理する変数*/
+String confirm = (String)request.getAttribute("confirm");/* 注意事項確認を行ったか否かを管理する変数*/
+String second = (String)session.getAttribute("second");
 
       out.write("\r\n");
       out.write("\r\n");
@@ -111,20 +112,27 @@ String confirm = (String)request.getAttribute("confirm");    /* 注意事項確�
       out.write("\r\n");
       out.write("}\r\n");
       out.write("\r\n");
-      out.write("\r\n");
       out.write("</style>\r\n");
       out.write("\t<head>\r\n");
       out.write("\t\t<title>【グループ選択ページ】</title>\r\n");
       out.write("\t</head>\r\n");
+      out.write("\t<meta http-equiv=\"Pragma\" content=\"no-cache\">\r\n");
+      out.write("\t<meta http-equiv=\"Cache-Control\" content=\"no-cache\">\r\n");
+      out.write("\t");
+if(second != null) {
+      out.write("\r\n");
+      out.write("\t<meta http-equiv=\"refresh\" content=\"3; URL=");
+      out.print(request.getContextPath());
+      out.write("/view/ch04/logout.jsp\">\r\n");
+      out.write("\t");
+} 
+      out.write("\r\n");
       out.write("\t<body>\r\n");
       out.write("\t\t\t<h1 style=\"text-align:center\">グループ選択ページ</h1>\r\n");
       out.write("\t\t\t<hr style=\"height:3; background-color:#0000ff\" />\r\n");
       out.write("\t\t\t<br>\r\n");
       out.write("\t\t\t<br>\r\n");
       out.write("\t\t\t<br>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("\t\t\t<!-- 2つのプルダウンの選択結果により表示変更。またいいえを選択した場合選択でもグループは保持される\r\n");
@@ -213,16 +221,16 @@ if(confirm == null) {
       out.write("\t\t\t\t");
  if(message != null) {
       out.write("\r\n");
-      out.write("\t\t\t<p style=\"color:red\"class = \"Warning\">");
+      out.write("\t\t\t\t<p style=\"color:red\"class = \"Warning\">");
       out.print(message );
       out.write("</p>\r\n");
-      out.write("\t\t\t");
+      out.write("\t\t\t\t");
 } 
       out.write("\r\n");
       out.write("\t\t\t\t<br>\r\n");
       out.write("\t\t\t\t<input type=\"submit\" value=\"送信\">\r\n");
       out.write("\t\t\t\t</form>\r\n");
-      out.write("\t\t\t</body>\r\n");
+      out.write("\t</body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

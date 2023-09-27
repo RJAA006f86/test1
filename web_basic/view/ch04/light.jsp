@@ -7,9 +7,8 @@
 /*表示色はアプリケーションスコープから取得し変数に代入*/
 ServletContext ap = getServletContext();						/* アプリケーションスコープの保存領域を取得*/
 String colorGroup1 = (String)ap.getAttribute("colorGroup1");	/* グループ1に割り振られる色を保管する変数*/
-String colorGroup2 = (String)ap.getAttribute("colorGroup2");	/* グループ2に割り振られる色を保管する変数*/
-String userType = (String)request.getAttribute("userType");		/* ユーザーがグループ選択を行った際のパラメータが代入される変数
-																userType=1がcolorGroup1、userType=2がcolorGroup2*/
+String colorGroup2 = (String)ap.getAttribute("colorGroup2");    /* グループ2に割り振られる色を保管する変数*/
+String userType = (String)request.getAttribute("userType");		/* ユーザーがグループ選択を行った際のパラメータが代入される変数																userType=1がcolorGroup1、userType=2がcolorGroup2*/
 %>
 
 
@@ -56,17 +55,43 @@ transition:0.3s;
 	<head>
 		<title>【サイリウム表示ページ】</title>
 	</head>
+	<meta http-equiv="refresh" content="180; URL=<%=request.getContextPath()%>/Userctl?userType=<%=userType%>&confirm=True&reload=True">
 <!-- 条件分岐。変数に代入されたパラメータuserTypeによりグループを判断しそれぞれのグループの色を表示-->
-<%if(userType.equals("1")){%>
-<body style="background-color:<%=colorGroup1%>">
-<%} else if(userType.equals("2")){ %>
-<body style="background-color:<%=colorGroup2%>">
-<%} %>
+<!-- アプリケーションスコープ直接参照とアプリケーションの内容を保存した変数の併用で様々な条件分岐パターンに対応-->
+<!-- 上記例:アプリケーションスコープは空ではないが内容が白であると不都合な場合(１つ目の条件分岐)-->
+<!-- デフォルト、もしくは色選択によってホワイトが選択されている場合はボタン画像がグレーに切り替わる-->
+<%if(userType.equals("1")&&(String)ap.getAttribute("colorGroup1") != null&&!(colorGroup1.equals("white"))){%>
+<body style="background-color:<%=(String)ap.getAttribute("colorGroup1")%>">
 <div class="space">
 <!-- グループ選択ページへ-->
 <p><a href="<%=request.getContextPath()%>/Userctl"><img src="<%=request.getContextPath()%>/img/btnt.png" alt="TOPへ" border="0"/></a></p>
 <!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->
-<p><a href="<%=request.getContextPath()%>/Userctl?userType=<%=userType%>&confirm=True"><img src="<%=request.getContextPath()%>/img/btnr.png" alt="リロード" border="0"/></a></p>
+<p><a href="<%=request.getContextPath()%>/Userctl?userType=<%=userType%>&confirm=True&reload=True"><img src="<%=request.getContextPath()%>/img/btnr.png" alt="リロード" border="0"/></a></p>
 </div>
+<%} else if(userType.equals("1")&&(String)ap.getAttribute("colorGroup1") == null||(String)ap.getAttribute("colorGroup1") != null&&colorGroup1.equals("white")){%>
+<body style="background-color:white">
+<div class="space">
+<!-- グループ選択ページへ-->
+<p><a href="<%=request.getContextPath()%>/Userctl"><img src="<%=request.getContextPath()%>/img/btntw.png" alt="TOPへ" border="0"/></a></p>
+<!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->
+<p><a href="<%=request.getContextPath()%>/Userctl?userType=<%=userType%>&confirm=True&reload=True"><img src="<%=request.getContextPath()%>/img/btnrw.png" alt="リロード" border="0"/></a></p>
+</div>
+<%}else if(userType.equals("2")&&(String)ap.getAttribute("colorGroup2") != null&&!(colorGroup2.equals("white"))){ %>
+<body style="background-color:<%=(String)ap.getAttribute("colorGroup2")%>">
+<div class="space">
+<!-- グループ選択ページへ-->
+<p><a href="<%=request.getContextPath()%>/Userctl"><img src="<%=request.getContextPath()%>/img/btnt.png" alt="TOPへ" border="0"/></a></p>
+<!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->
+<p><a href="<%=request.getContextPath()%>/Userctl?userType=<%=userType%>&confirm=True&reload=True"><img src="<%=request.getContextPath()%>/img/btnr.png" alt="リロード" border="0"/></a></p>
+</div>
+<%} else if(userType.equals("2")&&(String)ap.getAttribute("colorGroup2") == null||(String)ap.getAttribute("colorGroup2") != null&&colorGroup2.equals("white")){%>
+<body style="background-color:white">
+<div class="space">
+<!-- グループ選択ページへ-->
+<p><a href="<%=request.getContextPath()%>/Userctl"><img src="<%=request.getContextPath()%>/img/btntw.png" alt="TOPへ" border="0"/></a></p>
+<!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->
+<p><a href="<%=request.getContextPath()%>/Userctl?userType=<%=userType%>&confirm=True&reload=True"><img src="<%=request.getContextPath()%>/img/btnrw.png" alt="リロード" border="0"/></a></p>
+</div>
+<% }%>
 </body>
 </html>

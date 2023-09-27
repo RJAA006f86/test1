@@ -186,6 +186,12 @@ if(colorGroup1 == null&&colorGroup2 == null) {
       out.write("\t\t\t\t\t\t<input type=\"hidden\" name=\"reset\" value=\"reset\">\r\n");
       out.write("\t\t\t\t\t\t<input type=\"submit\" value=\"色選択リセット\">\r\n");
       out.write("\t\t\t\t\t</form>\r\n");
+      out.write("\t\t\t\t\t<!--アクセス数カウントページへ-->\r\n");
+      out.write("\t\t\t\t\t<form action=\"");
+      out.print(request.getContextPath());
+      out.write("/view/ch04/accessCount.jsp\"method=\"get\">\r\n");
+      out.write("\t\t\t\t\t\t<input type=\"submit\" value=\"アクセス数カウント\">\r\n");
+      out.write("\t\t\t\t\t</form>\r\n");
       out.write("\t\t\t</body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
