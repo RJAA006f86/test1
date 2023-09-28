@@ -22,12 +22,12 @@ https://github.com/RJAA006f86/test1/assets/144433854/5dfcbbef-ffe2-42cd-927b-b12
 
 制作環境
 
-・Windows 10 Home
-・64 ビット オペレーティング システム、x64 ベース プロセッサ
-・Eclipseバージョン　Version: 4.3.2.v20140221-1852
-・Google Chrome バージョン: 116.0.5845.96（Official Build） （64 ビット）
-・Ecripse デフォルトJRE JAVA8
-・Ecripse　Tomcatバージョン Apache Tomcat/6.0.39
+・Windows 10 Home  
+・64 ビット オペレーティング システム、x64 ベース プロセッサ  
+・Eclipseバージョン　Version: 4.3.2.v20140221-1852  
+・Google Chrome バージョン: 116.0.5845.96（Official Build） （64 ビット）  
+・Ecripse デフォルトJRE JAVA8  
+・Ecripse　Tomcatバージョン Apache Tomcat/6.0.39  
 
 動作環境(特別なものではないので下記以外でもおそらく動作します)
 
