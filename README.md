@@ -31,7 +31,7 @@ https://github.com/RJAA006f86/test1/assets/144433854/5dfcbbef-ffe2-42cd-927b-b12
 
 動作環境(特別なものではないので下記以外でもおそらく動作します)
 
-・Apache Tomcat/7.0.81
+・Apache Tomcat/7.0.81  
 ・Google Chrome バージョン: 116.0.5845.96（Official Build） （64 ビット）
 
 ## インストール方法
