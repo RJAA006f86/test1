@@ -83,5 +83,9 @@ if(entry == null){
 						<input type="hidden" name="reset" value="reset">
 						<input type="submit" value="色選択リセット">
 					</form>
+					<!--アクセス数カウントページへ-->
+					<form action="<%=request.getContextPath()%>/view/ch04/accessCount.jsp"method="get">
+						<input type="submit" value="アクセス数カウント">
+					</form>
 			</body>
 </html>

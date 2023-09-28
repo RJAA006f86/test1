@@ -59,9 +59,8 @@ public final class light_jsp extends org.apache.jasper.runtime.HttpJspBase
 /*表示色はアプリケーションスコープから取得し変数に代入*/
 ServletContext ap = getServletContext();						/* アプリケーションスコープの保存領域を取得*/
 String colorGroup1 = (String)ap.getAttribute("colorGroup1");	/* グループ1に割り振られる色を保管する変数*/
-String colorGroup2 = (String)ap.getAttribute("colorGroup2");	/* グループ2に割り振られる色を保管する変数*/
-String userType = (String)request.getAttribute("userType");		/* ユーザーがグループ選択を行った際のパラメータが代入される変数
-																userType=1がcolorGroup1、userType=2がcolorGroup2*/
+String colorGroup2 = (String)ap.getAttribute("colorGroup2");    /* グループ2に割り振られる色を保管する変数*/
+String userType = (String)request.getAttribute("userType");		/* ユーザーがグループ選択を行った際のパラメータが代入される変数																userType=1がcolorGroup1、userType=2がcolorGroup2*/
 
       out.write("\r\n");
       out.write("\r\n");
@@ -109,19 +108,20 @@ String userType = (String)request.getAttribute("userType");		/* ユーザーが�
       out.write("\t<head>\r\n");
       out.write("\t\t<title>【サイリウム表示ページ】</title>\r\n");
       out.write("\t</head>\r\n");
+      out.write("\t<meta http-equiv=\"refresh\" content=\"180; URL=");
+      out.print(request.getContextPath());
+      out.write("/Userctl?userType=");
+      out.print(userType);
+      out.write("&confirm=True&reload=True\">\r\n");
       out.write("<!-- 条件分岐。変数に代入されたパラメータuserTypeによりグループを判断しそれぞれのグループの色を表示-->\r\n");
-if(userType.equals("1")){
+      out.write("<!-- アプリケーションスコープ直接参照とアプリケーションの内容を保存した変数の併用で様々な条件分岐パターンに対応-->\r\n");
+      out.write("<!-- 上記例:アプリケーションスコープは空ではないが内容が白であると不都合な場合(１つ目の条件分岐)-->\r\n");
+      out.write("<!-- デフォルト、もしくは色選択によってホワイトが選択されている場合はボタン画像がグレーに切り替わる-->\r\n");
+if(userType.equals("1")&&(String)ap.getAttribute("colorGroup1") != null&&!(colorGroup1.equals("white"))){
       out.write("\r\n");
       out.write("<body style=\"background-color:");
-      out.print(colorGroup1);
+      out.print((String)ap.getAttribute("colorGroup1"));
       out.write("\">\r\n");
-} else if(userType.equals("2")){ 
-      out.write("\r\n");
-      out.write("<body style=\"background-color:");
-      out.print(colorGroup2);
-      out.write("\">\r\n");
-} 
-      out.write("\r\n");
       out.write("<div class=\"space\">\r\n");
       out.write("<!-- グループ選択ページへ-->\r\n");
       out.write("<p><a href=\"");
@@ -134,10 +134,71 @@ if(userType.equals("1")){
       out.print(request.getContextPath());
       out.write("/Userctl?userType=");
       out.print(userType);
-      out.write("&confirm=True\"><img src=\"");
+      out.write("&confirm=True&reload=True\"><img src=\"");
       out.print(request.getContextPath());
       out.write("/img/btnr.png\" alt=\"リロード\" border=\"0\"/></a></p>\r\n");
       out.write("</div>\r\n");
+} else if(userType.equals("1")&&(String)ap.getAttribute("colorGroup1") == null||(String)ap.getAttribute("colorGroup1") != null&&colorGroup1.equals("white")){
+      out.write("\r\n");
+      out.write("<body style=\"background-color:white\">\r\n");
+      out.write("<div class=\"space\">\r\n");
+      out.write("<!-- グループ選択ページへ-->\r\n");
+      out.write("<p><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/Userctl\"><img src=\"");
+      out.print(request.getContextPath());
+      out.write("/img/btntw.png\" alt=\"TOPへ\" border=\"0\"/></a></p>\r\n");
+      out.write("<!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->\r\n");
+      out.write("<p><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/Userctl?userType=");
+      out.print(userType);
+      out.write("&confirm=True&reload=True\"><img src=\"");
+      out.print(request.getContextPath());
+      out.write("/img/btnrw.png\" alt=\"リロード\" border=\"0\"/></a></p>\r\n");
+      out.write("</div>\r\n");
+}else if(userType.equals("2")&&(String)ap.getAttribute("colorGroup2") != null&&!(colorGroup2.equals("white"))){ 
+      out.write("\r\n");
+      out.write("<body style=\"background-color:");
+      out.print((String)ap.getAttribute("colorGroup2"));
+      out.write("\">\r\n");
+      out.write("<div class=\"space\">\r\n");
+      out.write("<!-- グループ選択ページへ-->\r\n");
+      out.write("<p><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/Userctl\"><img src=\"");
+      out.print(request.getContextPath());
+      out.write("/img/btnt.png\" alt=\"TOPへ\" border=\"0\"/></a></p>\r\n");
+      out.write("<!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->\r\n");
+      out.write("<p><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/Userctl?userType=");
+      out.print(userType);
+      out.write("&confirm=True&reload=True\"><img src=\"");
+      out.print(request.getContextPath());
+      out.write("/img/btnr.png\" alt=\"リロード\" border=\"0\"/></a></p>\r\n");
+      out.write("</div>\r\n");
+} else if(userType.equals("2")&&(String)ap.getAttribute("colorGroup2") == null||(String)ap.getAttribute("colorGroup2") != null&&colorGroup2.equals("white")){
+      out.write("\r\n");
+      out.write("<body style=\"background-color:white\">\r\n");
+      out.write("<div class=\"space\">\r\n");
+      out.write("<!-- グループ選択ページへ-->\r\n");
+      out.write("<p><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/Userctl\"><img src=\"");
+      out.print(request.getContextPath());
+      out.write("/img/btntw.png\" alt=\"TOPへ\" border=\"0\"/></a></p>\r\n");
+      out.write("<!-- 再読み込み。ユーザーがこのページにアクセスしたときと同じパラメータをサーブレットUserctlへ送信-->\r\n");
+      out.write("<p><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/Userctl?userType=");
+      out.print(userType);
+      out.write("&confirm=True&reload=True\"><img src=\"");
+      out.print(request.getContextPath());
+      out.write("/img/btnrw.png\" alt=\"リロード\" border=\"0\"/></a></p>\r\n");
+      out.write("</div>\r\n");
+ }
+      out.write("\r\n");
       out.write("</body>\r\n");
       out.write("</html>\r\n");
     } catch (Throwable t) {

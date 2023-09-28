@@ -61,6 +61,8 @@ public class Admin extends HttpServlet {
 					/*表示色設定ページで色選択をリセットボタンがクリックされパラメータ「reset」を受信した際の処理*/
 					if(reset.equals("reset")){
 						session.invalidate();
+						ap.removeAttribute("colorGroup1");
+						ap.removeAttribute("colorGroup2");
 					}
 					request.getRequestDispatcher("/view/ch04/colorChange.jsp").forward(request, response);
 					/*エラー等が発生した際の処理*/
